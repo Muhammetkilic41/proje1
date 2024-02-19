@@ -1,0 +1,172 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Sitesi</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'filmler.css' %}">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <a href="{% url 'index' %}">Ana Sayfa</a>
+        <div class="dropdown">
+            <button class="dropbtn">Filmler</button>
+            <div class="dropdown-content">
+                <a href="#" onclick="showCategory('dram')">Dram</a>
+                <a href="#" onclick="showCategory('aksiyon')">Aksiyon</a>
+            </div>
+        </div>
+        <a href="{% url 'about_us' %}">Hakkımızda</a>
+        <a href="#">İletişim</a>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Film Ara...">
+            <button onclick="searchFilm()">Ara</button>
+        </div>
+        <div class="auth-buttons">
+            <a href="{% url 'login' %}">Giriş</a>
+            <a href="{% url 'register' %}">Üye Ol</a>
+        </div>
+    </div>
+    
+    <div class="film-container">
+        <div class="film">
+            <img src="{% static 'img/lastsamurai.jpg' %}" alt="The Last Samurai">
+            <h2>The Last Samurai(2003)</h2>
+            <p>"The Last Samurai", sinema tarihinde unutulmaz bir yer edinen, duygu dolu bir epik macera. Film, 19. yüzyıl ... <a href="{% url 'last_samurai_detay' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/the_color_purple.jpg' %}" alt="The Color Purple">
+            <h2>The Color Purple(1985)</h2>
+            <p>"The Color Purple", insanın iç dünyasına derin bir yolculuğa çıkaran etkileyici bir film. Alice Walker'ın aynı... <a href="{% url 'purple' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/the_place.jpg' %}" alt="The Place">
+            <h2>The Place(2017)</h2>
+            <p>"The Place", izleyicilere düşündürücü ve sıradışı bir deneyim sunan ilginç bir film. Bu yapım...<a href="{% url 'the_place' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/bythesea.jpg' %}" alt="Manchester by the Sea">
+            <h2>Manchester by the Sea(2016)</h2>
+            <p>Certainly! Here's a short English text about "Manchester by the Sea": "Manchester by the Sea" - A
+                Heartbreaking Exploration of Grief and Redemption <a href="#">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/flower_moon.jpg' %}" alt="Killers of the Flower Moon">
+            <h2>Killers of the Flower Moon(2023)</h2>
+            <p>"Killers of the Flower Moon" is a captivating non-fiction book written by David Grann and published in
+                2017. It delves into the shocking and tragic.. <a href="#">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/the_father.jpg' %}" alt="The Father">
+            <h2>The Father(2020)</h2>
+            <p>"The Father" is a poignant and emotionally gripping drama film directed by Florian Zeller, based on his
+                own play "Le Père." Released in 2020, <a href="#">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/australia.jpg' %}" alt="Australia">
+            <h2>Australia(2008)</h2>
+            <p>"Australia", 2008 yapımı bir epik drama ve romantik filmidir. Yönetmenliğini Baz Luhrmann'ın üstlendiği
+                film, II. Dünya Savaşı öncesinde, Avustralya'nın kırsal kesiminde geçen bir hikayeye odaklanır.
+                 <a href="#">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/promised.jpg' %}" alt="The Promised Land">
+            <h2>The Promised Land(2023)</h2>
+            <p>The Promised Land, hayat boyu süren hayalinin peşinden koşan Ludvig Kahlen'in hikayesini konu ediyor.
+                1700'lerin ortalarında, Danimarka Kralı V. Frederik, Jutland'ın vahşi fundalığının evcilleştirilmesi,
+                ekilmesi ve kolonileştirilmesi gerektiğini, böylece uygarlığın <a href="#">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/carlito.jpg' %}" alt="Carlito's Way">
+            <h2>Carlito's Way(1993)</h2>
+            <p>"Carlito's Way", 1993 yapımı bir Amerikan suç draması filmidir. Brian De Palma tarafından yönetilen ve
+                David Koepp tarafından senaryosu yazılan film, Puzo'nun "Carlito'nun Yolu" adlı romanına dayanmaktadır.
+                <a href="#">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/carlito.jpg' %}" alt="Carlito's Way">
+            <h2>Top Gun(1986)</h2>
+            <p>"Carlito's Way", 1993 yapımı bir Amerikan suç draması filmidir. Brian De Palma tarafından yönetilen ve
+                David Koepp tarafından senaryosu yazılan film, Puzo'nun "Carlito'nun Yolu" adlı romanına dayanmaktadır.
+                <a href="#">Devamını Oku</a></p>
+        </div>
+       
+        
+    </div>
+    <hr>
+    <div class="pagination">
+        <a href="#" onclick="goToPage(currentPage - 1)">Önceki Sayfa</a>
+        <a href="#" onclick="goToPage(1)">1</a>
+        <a href="#" onclick="goToPage(2)">2</a>
+        <!-- Gerekirse daha fazla sayfa numarası eklenebilir -->
+        <a href="#" onclick="goToPage(currentPage + 1)">Sonraki Sayfa</a>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const filmsPerPage = 9; // Sayfa başına gösterilecek film sayısı
+    
+        function goToPage(page) {
+            currentPage = page;
+            updateFilms();
+        }
+    
+        function updateFilms() {
+            const films = document.querySelectorAll('.film');
+            const startIndex = (currentPage - 1) * filmsPerPage;
+            const endIndex = startIndex + filmsPerPage;
+    
+            films.forEach((film, index) => {
+                if (index >= startIndex && index < endIndex) {
+                    film.style.display = 'block';
+                } else {
+                    film.style.display = 'none';
+                }
+            });
+        }
+    
+        function searchFilm() {
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const films = document.querySelectorAll('.film');
+    
+            films.forEach(film => {
+                const title = film.querySelector('h2').innerText.toLowerCase();
+                if (title.includes(searchInput) || searchInput === '') {
+                    film.style.display = 'block';
+                } else {
+                    film.style.display = 'none';
+                }
+            });
+        }
+    
+        // Arama kutusunda herhangi bir değişiklik olduğunda arama işlemini yap
+        document.getElementById('search-input').addEventListener('input', searchFilm);
+    
+        updateFilms(); // Sayfa yüklendiğinde ilk sayfayı göster
+        
+        function showCategory(category) {
+            // Kategoriye göre filmleri filtrele
+            const films = document.querySelectorAll('.film');
+    
+            films.forEach(film => {
+                const categoryElement = film.querySelector('.category');
+                if (categoryElement.innerText.toLowerCase() === category) {
+                    film.style.display = 'block';
+                } else {
+                    film.style.display = 'none';
+                }
+            });
+        }
+    </script>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Film Sitesi. Made by MK.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>

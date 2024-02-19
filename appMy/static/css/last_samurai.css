@@ -1,0 +1,28 @@
+/* last_samurai.css */
+
+/* H1 başlığı için stil */
+h1 {
+    text-align: center; /* Başlığı yatayda merkezler */
+    color: #333; /* Metin rengi */
+}
+
+/* İframe için stil */
+iframe {
+    display: block; /* Blok element olarak davranır */
+    margin: 0 auto 20px; /* Yatayda merkezler ve alt kısmından 20 piksel boşluk bırakır */
+}
+
+/* Film resmi için stil */
+#film-resim {
+    max-width: 100%; /* Resmin en fazla genişliği belirlenen alana sığacak şekilde ayarlanacak */
+    height: auto; /* Yükseklik otomatik olarak ayarlanacak, oran korunacak */
+    display: block; /* İmajın blok element olarak davranmasını sağlar */
+    margin: 0 auto; /* İmajı yatayda merkezlemek için */
+}
+
+/* Paragraf için stil */
+p {
+    text-align: center; /* Metni yatayda merkezler */
+    color: #666; /* Metin rengi */
+    font-style: italic; /* İtalik metin */
+}

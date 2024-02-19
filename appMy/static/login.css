@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.container {
+    margin: 100px auto;
+    max-width: 400px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.input-container {
+    margin-bottom: 20px;
+}
+
+.input-container label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.input-container input[type="text"],
+.input-container input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.input-container input[type="text"]:focus,
+.input-container input[type="password"]:focus {
+    border-color: #333;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #555;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+}

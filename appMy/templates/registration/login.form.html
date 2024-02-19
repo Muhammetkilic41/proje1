@@ -1,0 +1,7 @@
+<div class="user-info">
+    {% if user.is_authenticated %}
+        {{ user.username }} | <a href="{% url 'logout' %}">Çıkış Yap</a>
+    {% else %}
+        <a href="{% url 'login' %}">Giriş Yap</a> | <a href="{% url 'signup' %}">Üye Ol</a>
+    {% endif %}
+</div>

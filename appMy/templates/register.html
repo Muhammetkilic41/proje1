@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Üye Ol</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <h2>Üye Ol</h2>
+        {% if form.errors %}
+            <p class="error">Lütfen aşağıdaki hataları düzeltin:</p>
+            <ul class="error">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="input-container">
+            <label for="username">Kullanıcı Adı</label>
+            <input type="text" placeholder="Kullanıcı adınızı girin" name="username" required>
+        </div>
+        <div class="input-container">
+            <label for="email">E-posta Adresi</label>
+            <input type="email" placeholder="E-posta adresinizi girin" name="email" required>
+        </div>
+        <div class="input-container">
+            <label for="password1">Şifre</label>
+            <input type="password" placeholder="Şifrenizi girin" name="password1" required>
+        </div>
+        <div class="input-container">
+            <label for="password2">Şifreyi Onayla</label>
+            <input type="password" placeholder="Şifrenizi tekrar girin" name="password2" required>
+        </div>
+        <div class="button-container">
+            <button type="submit">Üye Ol</button>
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </form>
+</div>
+
+</body>
+</html>

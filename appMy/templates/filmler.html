@@ -1,0 +1,286 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Sitesi</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'filmler.css' %}">
+      <style>
+        /* Navbar stilleri */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 16px;  
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <a href="{% url 'index' %}">Ana Sayfa</a>
+        <div class="dropdown">
+            <button class="dropbtn">Filmler</button>
+            <div class="dropdown-content">
+                <a href="{% url 'action' %}">Aksiyon</a> 
+                <a href="{% url 'dram' %}">Dram</a>
+                
+                <a href="{% url 'filmler' %}">Tümü</a>
+            </div>
+        </div>
+        <a href="{% url 'about_us' %}">Hakkımızda</a>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Film Ara...">
+            <button onclick="searchFilm()">Ara</button>
+        </div>
+        <div class="auth-buttons">
+            {% if user.is_authenticated %}
+                <span class="welcome-message">Hoş geldiniz, {{ user.username }}</span>
+                <a href="{% url 'logout' %}">Çıkış</a>
+            {% else %}
+                <a href="{% url 'login' %}">Giriş</a>
+                <a href="{% url 'register' %}">Üye Ol</a>
+            {% endif %}
+        </div>
+    </div>
+    
+    
+    <div class="film-container">
+        <div class="film">
+            <img src="{% static 'img/lastsamurai.jpg' %}" alt="The Last Samurai">
+            <h2>The Last Samurai(2003)</h2>
+            <p>"The Last Samurai", sinema tarihinde unutulmaz bir yer edinen, duygu dolu bir epik macera. Film, 19. yüzyıl ... <a href="{% url 'last_samurai_detay' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/the_color_purple.jpg' %}" alt="The Color Purple">
+            <h2>The Color Purple(1985)</h2>
+            <p>"The Color Purple", insanın iç dünyasına derin bir yolculuğa çıkaran etkileyici bir film. Alice Walker'ın aynı... <a href="{% url 'purple' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/the_place.jpg' %}" alt="The Place">
+            <h2>The Place(2017)</h2>
+            <p>"The Place", izleyicilere düşündürücü ve sıradışı bir deneyim sunan ilginç bir film. Bu yapım...<a href="{% url 'the_place' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/bythesea.jpg' %}" alt="Manchester by the Sea">
+            <h2>Manchester by the Sea(2016)</h2>
+            <p>"Manchester by the Sea", duygusal bir drama filmi. Ana karakterimiz Lee Chandler (Casey Affleck), geçmişte yaşadığı trajik olaylar nedeni... <a href="{% url 'bythesea' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/flower_moon.jpg' %}" alt="Killers of the Flower Moon">
+            <h2>Killers of the Flower Moon(2023)</h2>
+            <p> "Killers of the Flower Moon", Osage cinayetleri ve FBI’ın doğuşunu konu alan etkileyici bir film. 1920’lerde,.. <a href="{% url 'flower_moon' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/the_father.jpg' %}" alt="The Father">
+            <h2>The Father(2020)</h2>
+            <p> "The Father", bir baba-oğul ilişkisini konu alan etkileyici bir dram filmidir. Yaşlı bir adam olan Anthony, artık yaşlanmanın etkilerini hissetmekte... <a href="{% url 'the_father' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/australia.jpg' %}" alt="Australia">
+            <h2>Australia(2008)</h2>
+            <p> "Australia", kişisel ve duygusal bir yolculuk sunan, nefes kesici bir epik drama ve romantik filmidir
+                 <a href="{% url 'Australia' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/promised.jpg' %}" alt="The Promised Land">
+            <h2>The Promised Land(2023)</h2>
+            <p>"The Promised Land", hayat boyu süren hayalinin peşinden koşan Ludvig Kahlen'in hikayesini konu ediyor. 1700'lerin ortalarında, Danimarka Kralı  ... <a href="{% url 'basterdan' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/carlito.jpg' %}" alt="Carlito's Way">
+            <h2>Carlito's Way(1993)</h2>
+            <p>"Carlito's Way", 1993 yapımı bir Amerikan suç draması filmidir. Brian De Palma tarafından yönetilen ve David...
+                <a href="{% url 'carlito' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/top_gun.jpg' %}" alt="Carlito's Way">
+            <h2>Top Gun(1986)</h2>
+            <p> "Top Gun", 1986 yapımı, aksiyon dolu bir film. Hava Kuvvetleri'nin en iyi savaş pilotlarını eğitmek üzere bir akademide geçen hikaye
+                <a href="{% url 'top_gun' %}">Devamını Oku</a></p>
+        </div>
+
+        <div class="film">
+            <img src="{% static 'img/a_separation.jpg' %}" alt="Carlito's Way">
+            <h2>A Separation(2011)</h2>
+            <p>  "Bir Ayrılık", Asghar Farhadi tarafından yazılıp yönetilen 2011 İran drama filmidir. Film, İran orta sınıfından bir çiftin ayrılmasına odaklanır
+                <a href="{% url 'a_separation' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/requim.jpg' %}" alt="Carlito's Way">
+            <h2>Requiem for a Dream(2000)</h2>
+            <p> "Bir Rüya için Ağıt", Darren Aronofsky tarafından yönetilen ve Hubert Selby Jr.'ın aynı adlı romanından uyarlanan 2000
+                <a href="{% url 'requim' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/godfather.jpg' %}" alt="Carlito's Way">
+            <h2>The Godfather(1972)</h2>
+            <p>  "Baba", 1972 yapımı bir Amerikan suç filmidir. Francis Ford Coppola tarafından yönetilen ve Mario Puzo'nun aynı adlı romanından uyarlanan film, suç ailesi 
+                <a href="{% url 'godfather' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/titanic.jpg' %}" alt="Carlito's Way">
+            <h2>Titanic(1997)</h2>
+            <p> "Bir Rüya için Ağıt", Darren Aronofsky tarafından yönetilen ve Hubert Selby Jr.'ın aynı adlı romanından uyarlanan 2000
+                <a href="{% url 'titanic' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/dark_knight.jpg' %}" alt="Carlito's Way">
+            <h2>The Dark Knight(2008)</h2>
+            <p>  "The Dark Knight", 2008 yapımı bir Amerikan süper kahraman filmidir. Christopher Nolan tarafından yönetilen ve David S. Goyer ve Nolan tarafından yazılan
+                <a href="{% url 'dark_knight' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/matrix.jpg' %}" alt="Carlito's Way">
+            <h2>The Matrix(1999)</h2>
+            <p> "The Matrix", 1999 yapımı, Lana ve Lilly Wachowski kardeşlerin yazıp yönettiği bir bilim kurgu filmidir. Film, siberpunk ve felsefi temaları
+                <a href="{% url 'matrix' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/gladiator.jpg' %}" alt="gladiator">
+            <h2>The Gladiators(2000)</h2>
+            <p>  "The Troy", 2004 yapımı, Wolfgang Petersen tarafından yönetilen bir epik savaş filmidir. Film, Antik Yunan destanı00
+                <a href="{% url 'gladiator' %}">Devamını Oku</a></p>
+        </div>
+        <div class="film">
+            <img src="{% static 'img/troy.jpg' %}" alt="Carlito's Way">
+            <h2>Troy(2004)</h2>
+            <p> "Bir Rüya için Ağıt", Darren Aronofsky tarafından yönetilen ve Hubert Selby Jr.'ın aynı adlı romanından uyarlanan 2000
+                <a href="{% url 'troy' %}">Devamını Oku</a></p>
+        </div>
+       
+        
+    </div>
+    <hr>
+    <div class="pagination">
+        <a href="#" onclick="goToPage(currentPage - 1)">Önceki Sayfa</a>
+        <a href="#" onclick="goToPage(1)">1</a>
+        <a href="#" onclick="goToPage(2)">2</a>
+        <!-- Gerekirse daha fazla sayfa numarası eklenebilir -->
+        <a href="#" onclick="goToPage(currentPage + 1)">Sonraki Sayfa</a>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const filmsPerPage = 9; // Sayfa başına gösterilecek film sayısı
+
+        function goToPage(page) {
+            currentPage = page;
+            updateFilms();
+        }
+
+        function updateFilms() {
+            const films = document.querySelectorAll('.film');
+            const startIndex = (currentPage - 1) * filmsPerPage;
+            const endIndex = startIndex + filmsPerPage;
+
+            films.forEach((film, index) => {
+                if (index >= startIndex && index < endIndex) {
+                    film.style.display = 'block';
+                } else {
+                    film.style.display = 'none';
+                }
+            });
+        }
+
+        function searchFilm() {
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const films = document.querySelectorAll('.film');
+
+            films.forEach(film => {
+                const title = film.querySelector('h2').innerText.toLowerCase();
+                if (title.includes(searchInput) || searchInput === '') {
+                    film.style.display = 'block';
+                } else {
+                    film.style.display = 'none';
+                }
+            });
+        }
+
+        // Arama kutusunda herhangi bir değişiklik olduğunda arama işlemini yap
+        document.getElementById('search-input').addEventListener('input', searchFilm);
+
+        updateFilms(); // Sayfa yüklendiğinde ilk sayfayı göster
+
+        function goToPage(page) {
+            currentPage = page;
+            updateFilms();
+
+            // Tarayıcı geçmişini güncelle
+            const url = window.location.href.split('?')[0] + `?page=${page}`;
+            window.history.pushState({
+                page: page
+            }, null, url);
+        }
+    </script>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Film Sitesi. Made by MK.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
